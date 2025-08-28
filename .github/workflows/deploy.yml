@@ -1,19 +1,14 @@
-- name: Deploy to GitHub Pages
-  run: |
-    cd public
-    git init
-    git config user.name "GitHub Actions"
-    git config user.email "github-actions@github.com"
-    git add .
-    git commit -m "Deploy: $(date)"
-    git push https://x-access-token:${{ secrets.PERSONAL_TOKEN }}@github.com/djklmin/djklmin.github.io.git HEAD:main --force
+# 首先定义工作流的名称（可选）
+name: Deploy to GitHub Pages
 
+# 然后定义触发事件 (必须放在最顶层)
 on:
   push:
-    branches: [main]
+    branches: [ main ]
   pull_request:
-    branches: [main]
+    branches: [ main ]
 
+# 接着定义任务
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -21,26 +16,31 @@ jobs:
       contents: write
     
     steps:
-    - name: Checkout
-      uses: actions/checkout@v4  # 从 v3 更新到 v4
+      # Step 1: 检出代码
+      - name: Checkout
+        uses: actions/checkout@v4
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v4  # 从 v3 更新到 v4
-      with:
-        node-version: '20'  # 更新 Node.js 版本
-        cache: 'npm'
+      # Step 2: 设置 Node.js 环境
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
 
-    - name: Install dependencies
-      run: npm install --force
+      # Step 3: 安装依赖
+      - name: Install dependencies
+        run: npm install --force
 
-    - name: Generate static files
-      run: npm run build
+      # Step 4: 构建项目
+      - name: Generate static files
+        run: npm run build
 
-    - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v4  # 从 v3 更新到 v4
-      with:
-        personal_token: ${{ secrets.PERSONAL_TOKEN }}
-        publish_dir: ./public
-        publish_branch: main
-        external_repository: djklmin/djklmin.github.io
-        keep_files: false
+      # Step 5: 部署到 GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          personal_token: ${{ secrets.PERSONAL_TOKEN }}
+          publish_dir: ./public
+          publish_branch: main
+          external_repository: djklmin/djklmin.github.io
+          keep_files: false
