@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title><%= page.title %> | <%= config.title %></title>
+    <style>
+        /* 内联样式 */
+        .simple-header {
+            background: #fff; padding: 1rem 0; border-bottom: 1px solid #eee; 
+            text-align: center; position: relative;
+        }
+        .simple-header .home-link {
+            position: absolute; left: 2rem; top: 1rem; color: #333; 
+            text-decoration: none; font-size: 1rem;
+        }
+        .simple-header h1 { margin: 0; font-size: 1.8rem; color: #333; padding: 0.5rem 0; }
+        .categories-list { max-width: 800px; margin: 2rem auto; padding: 0 1rem; }
+        .category-item {
+            margin-bottom: 2rem; padding: 1.5rem; background: #fff; 
+            border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border: 1px solid #eee;
+        }
+        .category-name a { color: #333; text-decoration: none; font-size: 1.5rem; font-weight: 600; }
+        .category-name a:hover { color: #007acc; }
+        .post-list { list-style: none; padding: 0; margin: 1rem 0 0 0; }
+        .post-item { padding: 0.8rem 0; border-bottom: 1px solid #f0f0f0; display: flex; align-items: center; }
+        .post-item:last-child { border-bottom: none; }
+        .post-date { color: #666; font-size: 0.9rem; margin-right: 1rem; min-width: 80px; }
+        .post-title { color: #333; text-decoration: none; flex: 1; }
+        .post-title:hover { color: #007acc; }
+        .simple-footer { text-align: center; padding: 2rem; color: #666; border-top: 1px solid #eee; margin-top: 3rem; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
+        .main { min-height: 60vh; padding: 2rem 0; }
+    </style>
+</head>
+<body>
+    <!-- 页面内容保持不变 -->
+    <div class="simple-header">
+        <a href="<%= config.url %>" class="home-link">首页</a>
+        <h1><%= page.title || '分类' %></h1>
+    </div>
+
+    <main class="main">
+        <div class="container">
+            <div class="categories-list">
+                <% site.categories.each(function(category) { %>
+                    <div class="category-item">
+                        <h2 class="category-name">
+                            <a href="<%= url_for(category.path) %>">
+                                <%= category.name %> (<%= category.length %>)
+                            </a>
+                        </h2>
+                        
+                        <ul class="post-list">
+                            <% category.posts.each(function(post) { %>
+                                <li class="post-item">
+                                    <span class="post-date"><%= date(post.date, 'YYYY-MM-DD') %></span>
+                                    <a href="<%= url_for(post.path) %>" class="post-title"><%= post.title %></a>
+                                </li>
+                            <% }) %>
+                        </ul>
+                    </div>
+                <% }) %>
+            </div>
+        </div>
+    </main>
+
+    <footer class="simple-footer">
+        <p>&copy; <%= new Date().getFullYear() %> <%= config.title %></p>
+    </footer>
+</body>
+</html>
