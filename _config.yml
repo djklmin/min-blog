@@ -1,0 +1,103 @@
+# Hexo Configuration
+## Docs: https://hexo.io/docs/configuration.html
+## Source: https://github.com/hexojs/hexo/
+
+# Site
+title: Fly的博客
+subtitle: ''
+description: '一个热爱科技的初中生'
+keywords: 科技,编程,学习
+author: Fly
+language: zh-CN
+timezone: Asia/Shanghai
+
+# URL
+## 重要：本地预览必须这样设置
+url: http://localhost:4000
+root: /
+permalink: :year/:month/:day/:title/
+permalink_defaults:
+pretty_urls:
+  trailing_index: true
+  trailing_html: true
+
+# Directory
+source_dir: source
+public_dir: public
+tag_dir: tags
+archive_dir: archives
+category_dir: categories
+code_dir: downloads/code
+i18n_dir: :lang
+skip_render:
+    - 'admin/**/*'
+# Writing
+new_post_name: :title.md
+default_layout: post
+titlecase: false
+external_link:
+  enable: true
+  field: site
+  exclude: ''
+filename_case: 0
+render_drafts: false
+post_asset_folder: false
+relative_link: false
+future: true
+syntax_highlighter: highlight.js
+highlight:
+  line_number: true
+  auto_detect: false
+  tab_replace: ''
+  wrap: true
+  hljs: false
+prismjs:
+  preprocess: true
+  line_number: true
+  tab_replace: ''
+
+# Home page setting
+# 首页设置 - 每页显示文章数量
+index_generator:
+  path: ''
+  per_page: 5
+  order_by: -date
+
+# Category & Tag
+default_category: uncategorized
+category_map:
+tag_map:
+
+# Metadata elements
+meta_generator: true
+
+# Date / Time format
+## 显示更新时间
+date_format: YYYY-MM-DD
+time_format: HH:mm:ss
+updated_option: 'date'
+
+# Pagination
+per_page: 5
+pagination_dir: page
+
+# Include / Exclude file(s)
+include:
+exclude:
+ignore:
+
+# Extensions
+## Plugins: https://hexo.io/plugins/
+theme: ayer
+
+# Deployment
+deploy:
+  type: git
+  repository: ssh://git@ssh.github.com:443/djklmin/djklmin.github.io.git
+  branch: main
+# Local search
+search:
+  path: search.xml  # 索引文件的路径和名称
+  field: post       # 搜索的范围：post（文章）、page（页面）、all（所有）
+  content: true     # 是否包含文章的全部内容。如果为false，则只包含标题和摘要等元数据。
+  format: html      # 索引文件的内容格式：html（去除标记）或 raw（保留原始格式）
