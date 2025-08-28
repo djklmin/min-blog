@@ -1,4 +1,12 @@
-name: Deploy to GitHub Pages
+- name: Deploy to GitHub Pages
+  run: |
+    cd public
+    git init
+    git config user.name "GitHub Actions"
+    git config user.email "github-actions@github.com"
+    git add .
+    git commit -m "Deploy: $(date)"
+    git push https://x-access-token:${{ secrets.PERSONAL_TOKEN }}@github.com/djklmin/djklmin.github.io.git HEAD:main --force
 
 on:
   push:
