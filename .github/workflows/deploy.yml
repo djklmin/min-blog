@@ -11,19 +11,15 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-      pages: write
-      id-token: write
     
     steps:
     - name: Checkout
-      uses: actions/checkout@v4
-      with:
-        submodules: true
+      uses: actions/checkout@v4  # 从 v3 更新到 v4
 
     - name: Setup Node.js
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@v4  # 从 v3 更新到 v4
       with:
-        node-version: '20'
+        node-version: '20'  # 更新 Node.js 版本
         cache: 'npm'
 
     - name: Install dependencies
@@ -32,14 +28,11 @@ jobs:
     - name: Generate static files
       run: npm run build
 
-    - name: Setup Pages
-      uses: actions/configure-pages@v3
-
-    - name: Upload artifact
-      uses: actions/upload-pages-artifact@v2
-      with:
-        path: './public'
-
     - name: Deploy to GitHub Pages
-      id: deployment
-      uses: actions/deploy-pages@v2
+      uses: peaceiris/actions-gh-pages@v4  # 从 v3 更新到 v4
+      with:
+        deploy_key: ${{ secrets.PERSONAL_TOKEN }}
+        publish_dir: ./public
+        publish_branch: main
+        external_repository: djklmin/djklmin.github.io
+        keep_files: false
