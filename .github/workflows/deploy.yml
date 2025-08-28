@@ -36,11 +36,12 @@ jobs:
         run: npm run build
 
       # Step 5: 部署到 GitHub Pages
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          personal_token: ${{ secrets.PERSONAL_TOKEN }}
-          publish_dir: ./public
-          publish_branch: main
-          external_repository: djklmin/djklmin.github.io
-          keep_files: false
+     - name: Deploy to GitHub Pages
+  run: |
+    cd public
+    git init
+    git config user.name "GitHub Actions"
+    git config user.email "github-actions@github.com"
+    git add .
+    git commit -m "Deploy: $(date)"
+    git push https://x-access-token:${{ secrets.PERSONAL_TOKEN }}@github.com/djklmin/djklmin.github.io.git HEAD:main --force
