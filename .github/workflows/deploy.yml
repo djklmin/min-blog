@@ -33,7 +33,8 @@ jobs:
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
-        deploy_key: ${{ secrets.PERSONAL_TOKEN }}  # 修改这里！
+        # 使用 personal token 而不是 GITHUB_TOKEN
+        deploy_key: ${{ secrets.PERSONAL_TOKEN }}
         publish_dir: ./public
         publish_branch: main
         external_repository: djklmin/djklmin.github.io
