@@ -26,12 +26,11 @@ jobs:
       run: npm install --force
 
     - name: Generate static files
-      run: npm run build
+      run: npm run build  # 这只会运行 hexo generate，不会触发 hexo deploy
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v4
       with:
-        # 改用 personal_token 而不是 github_token
         personal_token: ${{ secrets.PERSONAL_TOKEN }}
         publish_dir: ./public
         publish_branch: main
