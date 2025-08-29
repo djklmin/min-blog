@@ -53,18 +53,21 @@
 </footer>
 
 <!-- Live2D 看板娘代码开始 -->
-<link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/live2d-widget@latest/lib/ui/waifu.css"/>
-<script src="https://fastly.jsdelivr.net/npm/live2d-widget@latest/lib/ui/waifu-tips.js"></script>
-<script src="https://fastly.jsdelivr.net/npm/live2d-widget@latest/lib/live2d.js"></script>
+<!-- 使用本地路径加载 Live2D 资源 -->
+<link rel="stylesheet" href="/js/waifu.css"/>
+<script src="/js/waifu-tips.js"></script>
+<script src="/js/live2d.js"></script>
 
 <script>
 // 初始化看板娘
 function initWidget() {
+    console.log('🔄 开始初始化看板娘...');
+    
     // 配置设置
     window.live2d_settings = {
         model: { 
             scale: 1,
-            // 指向你的 LSS 模型
+            // 使用本地路径指向 LSS 模型
             jsonPath: '/live2d_models/lss/LSS.model3.json',
         },
         display: {
@@ -104,7 +107,6 @@ function initWidget() {
                     "偷偷告诉你，博主最近又在折腾新东西了",
                     "嗯...我在想今晚吃什么好呢？"
                 ]
-                // 已移除触摸不同部位时的对话
             }
         },
         tools: {
@@ -116,17 +118,50 @@ function initWidget() {
     // 初始化看板娘
     if (typeof initLive2dWidget !== 'undefined') {
         initLive2dWidget();
+        console.log('✅ 看板娘初始化成功');
+    } else {
+        console.error('❌ initLive2dWidget 函数未定义');
+        // 3秒后重试
+        setTimeout(function() {
+            if (typeof initLive2dWidget !== 'undefined') {
+                initLive2dWidget();
+            }
+        }, 3000);
     }
+}
+
+// 资源加载检查
+function checkResourcesLoaded() {
+    const resources = ['/js/waifu.css', '/js/waifu-tips.js', '/js/live2d.js'];
+    let allLoaded = true;
+    
+    resources.forEach(resource => {
+        const elements = document.querySelectorAll(`[href="${resource}"], [src="${resource}"]`);
+        if (elements.length === 0) {
+            console.warn(`⚠️ 资源未找到: ${resource}`);
+            allLoaded = false;
+        }
+    });
+    
+    return allLoaded;
 }
 
 // 页面加载完成后延迟加载看板娘
 window.addEventListener('load', function() {
-    setTimeout(initWidget, 1000);
+    console.log('📄 页面加载完成，准备初始化看板娘');
+    
+    if (checkResourcesLoaded()) {
+        setTimeout(initWidget, 1000);
+    } else {
+        console.log('⏳ 资源未完全加载，3秒后重试...');
+        setTimeout(initWidget, 3000);
+    }
 });
 
 // 移动设备适配
 function checkMobile() {
     if (screen.width <= 768) {
+        console.log('📱 移动设备检测');
         // 为移动设备添加触摸事件支持
         document.addEventListener('touchstart', function() {
             if (window.live2d_widget) {
@@ -138,6 +173,14 @@ function checkMobile() {
 
 // 初始化移动设备检测
 checkMobile();
+
+// 备用加载方案
+setTimeout(function() {
+    if (typeof initLive2dWidget === 'undefined') {
+        console.log('🔄 尝试备用加载方案...');
+        // 可以在这里添加其他备选方案
+    }
+}, 5000);
 </script>
 <!-- Live2D 看板娘代码结束 -->
 
