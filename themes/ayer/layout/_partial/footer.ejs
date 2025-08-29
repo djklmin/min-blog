@@ -52,23 +52,130 @@
   </div>
 </footer>
 
-<!-- 安全的看板娘代码 - 使用外部JS文件 -->
+<!-- Live2D 看板娘本地加载 -->
+<link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/live2d-widget@latest/dist/waifu.css">
+<script src="https://fastly.jsdelivr.net/npm/live2d-widget@latest/dist/waifu-tips.js"></script>
+
 <script>
-// 将看板娘代码移到外部文件加载，避免EJS冲突
-(function() {
-    var live2dScript = document.createElement('script');
-    live2dScript.src = '/js/live2d-init.js'; // 我们将创建这个文件
-    live2dScript.defer = true;
-    document.head.appendChild(live2dScript);
+// 等待资源加载完成
+function initLive2DWidget() {
+    if (typeof initWidget === 'undefined') {
+        console.log('⏳ 等待看板娘资源加载...');
+        setTimeout(initLive2DWidget, 100);
+        return;
+    }
     
-    // 预先加载CSS
-    var live2dStyle = document.createElement('link');
-    live2dStyle.rel = 'stylesheet';
-    live2dStyle.href = 'https://fastly.jsdelivr.net/npm/live2d-widget@latest/lib/ui/waifu.css';
-    document.head.appendChild(live2dStyle);
-})();
+    console.log('🎯 开始初始化本地模型看板娘');
+    
+    // 使用本地LSS模型的配置
+    initWidget({
+        // 模型配置
+        model: {
+            jsonPath: '/live2d_models/lss/LSS.model3.json',
+            scale: 1,
+            homeUrl: '/'
+        },
+        // 显示设置
+        display: {
+            position: 'right',
+            width: 220,
+            height: 400,
+            hOffset: 0,
+            vOffset: -20,
+            superSample: 2
+        },
+        // 移动端设置
+        mobile: {
+            show: true,
+            scale: 0.6,
+            motion: true
+        },
+        // 交互设置
+        react: {
+            opacity: 0.9,
+            opacityDefault: 0.7,
+            opacityOnHover: 0.9
+        },
+        // 对话设置
+        dialog: {
+            enable: true,
+            script: {
+                click: [
+                    "嘿！欢迎来到我的小窝！✧(≖ ◡ ≖✿)",
+                    "这是一个用 Hexo + Ayer 主题搭建的博客~",
+                    "欢迎来到这个博客，请多指教！",
+                    "希望你能在这里找到有趣的内容！",
+                    "有什么想说的可以给我留言哦！"
+                ],
+                idle: [
+                    "今天天气真不错呢...",
+                    "好无聊啊，陪我玩会儿嘛~",
+                    "你说，我为什么会在这里呢？",
+                    "偷偷告诉你，博主最近又在折腾新东西了",
+                    "嗯...我在想今晚吃什么好呢？"
+                ]
+            }
+        },
+        // 工具栏设置
+        tools: {
+            enable: true,
+            items: ["switch-model", "switch-texture", "photo", "info", "quit"]
+        },
+        // 其他设置
+        drag: true,
+        logLevel: 'error',
+        waifuPath: 'https://fastly.jsdelivr.net/npm/live2d-widget@latest/dist/waifu-tips.json'
+    });
+    
+    console.log('✅ 看板娘配置完成');
+}
+
+// 页面加载处理
+function setupLive2D() {
+    // 移动设备检测
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 768;
+    
+    if (isMobile) {
+        console.log('📱 移动设备检测');
+        // 移动端延迟加载
+        setTimeout(initLive2DWidget, 2000);
+    } else {
+        // PC端立即加载
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', function() {
+                setTimeout(initLive2DWidget, 1000);
+            });
+        } else {
+            setTimeout(initLive2DWidget, 1500);
+        }
+    }
+}
+
+// 启动看板娘加载
+setupLive2D();
+
+// 备用加载机制
+setTimeout(function() {
+    if (typeof initWidget === 'undefined') {
+        console.log('🔄 备用加载机制启动');
+        // 重新尝试加载资源
+        const script = document.createElement('script');
+        script.src = 'https://fastly.jsdelivr.net/npm/live2d-widget@latest/dist/waifu-tips.js';
+        script.onload = initLive2DWidget;
+        document.head.appendChild(script);
+    }
+}, 5000);
+
+// 错误处理
+window.addEventListener('error', function(e) {
+    if (e.filename && e.filename.includes('live2d')) {
+        console.warn('Live2D相关错误:', e.message);
+    }
+});
 </script>
 
 <% if (theme.busuanzi && theme.busuanzi.enable){ %>
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 <% } %>
+
+
