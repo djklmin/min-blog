@@ -7,9 +7,9 @@
 
 // 配置常量
 const CONFIG = {
-    cssUrl: 'https://fastly.jsdelivr.net/npm/live2d-widget@latest/lib/ui/waifu.css',
-    tipsJsUrl: 'https://fastly.jsdelivr.net/npm/live2d-widget@latest/lib/ui/waifu-tips.js',
-    live2dJsUrl: 'https://fastly.jsdelivr.net/npm/live2d-widget@latest/lib/live2d.js',
+    cssUrl: '/js/waifu.css',
+    tipsJsUrl: '/js/waifu-tips.js',
+    live2dJsUrl: '/js/live2d.js',
     maxRetries: 3,
     retryDelay: 2000,
     loadTimeout: 10000
