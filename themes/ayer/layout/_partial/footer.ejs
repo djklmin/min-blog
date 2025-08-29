@@ -52,6 +52,95 @@
   </div>
 </footer>
 
+<!-- Live2D 看板娘代码开始 -->
+<link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/live2d-widget@latest/lib/ui/waifu.css"/>
+<script src="https://fastly.jsdelivr.net/npm/live2d-widget@latest/lib/ui/waifu-tips.js"></script>
+<script src="https://fastly.jsdelivr.net/npm/live2d-widget@latest/lib/live2d.js"></script>
+
+<script>
+// 初始化看板娘
+function initWidget() {
+    // 配置设置
+    window.live2d_settings = {
+        model: { 
+            scale: 1,
+            // 指向你的 LSS 模型
+            jsonPath: '/live2d_models/lss/LSS.model3.json',
+        },
+        display: {
+            position: 'right',
+            width: 220,
+            height: 400,
+            hOffset: 0,
+            vOffset: -20,
+            superSample: 2,
+        },
+        mobile: { 
+            show: true,        // 在移动设备上显示
+            scale: 0.6,        // 移动设备上的缩放比例
+            motion: true       // 移动设备上是否启用触摸动作
+        },
+        react: { 
+            opacity: 0.9, 
+            opacityDefault: 0.7,
+            opacityOnHover: 0.9
+        },
+        dialog: {
+            enable: true,
+            script: {
+                // 点击身体时的对话
+                click: [
+                    "嘿！欢迎来到我的小窝！✧(≖ ◡ ≖✿)",
+                    "这是一个用 Hexo + Ayer 主题搭建的博客~",
+                    "欢迎来到这个博客，请多指教！",
+                    "希望你能在这里找到有趣的内容！",
+                    "有什么想说的可以给我留言哦！"
+                ],
+                // 空闲时的随机对话
+                idle: [
+                    "今天天气真不错呢...",
+                    "好无聊啊，陪我玩会儿嘛~",
+                    "你说，我为什么会在这里呢？",
+                    "偷偷告诉你，博主最近又在折腾新东西了",
+                    "嗯...我在想今晚吃什么好呢？"
+                ]
+                // 已移除触摸不同部位时的对话
+            }
+        },
+        tools: {
+            enable: true,
+            items: ["switch-model", "switch-texture", "photo", "info", "quit"]
+        }
+    };
+    
+    // 初始化看板娘
+    if (typeof initLive2dWidget !== 'undefined') {
+        initLive2dWidget();
+    }
+}
+
+// 页面加载完成后延迟加载看板娘
+window.addEventListener('load', function() {
+    setTimeout(initWidget, 1000);
+});
+
+// 移动设备适配
+function checkMobile() {
+    if (screen.width <= 768) {
+        // 为移动设备添加触摸事件支持
+        document.addEventListener('touchstart', function() {
+            if (window.live2d_widget) {
+                window.live2d_widget.initMobile();
+            }
+        });
+    }
+}
+
+// 初始化移动设备检测
+checkMobile();
+</script>
+<!-- Live2D 看板娘代码结束 -->
+
 <% if (theme.busuanzi && theme.busuanzi.enable){ %>
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 <% } %>
