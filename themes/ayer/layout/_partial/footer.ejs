@@ -51,3 +51,24 @@
     </ul>
   </div>
 </footer>
+
+<!-- 安全的看板娘代码 - 使用外部JS文件 -->
+<script>
+// 将看板娘代码移到外部文件加载，避免EJS冲突
+(function() {
+    var live2dScript = document.createElement('script');
+    live2dScript.src = '/js/live2d-init.js'; // 我们将创建这个文件
+    live2dScript.defer = true;
+    document.head.appendChild(live2dScript);
+    
+    // 预先加载CSS
+    var live2dStyle = document.createElement('link');
+    live2dStyle.rel = 'stylesheet';
+    live2dStyle.href = 'https://fastly.jsdelivr.net/npm/live2d-widget@latest/lib/ui/waifu.css';
+    document.head.appendChild(live2dStyle);
+})();
+</script>
+
+<% if (theme.busuanzi && theme.busuanzi.enable){ %>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<% } %>
