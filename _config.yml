@@ -93,12 +93,11 @@ theme: ayer
 # Deployment
 deploy:
   type: git
-  repo: https://github.com/djklmin/djklmin.github.io.git
+  repository: ssh://git@ssh.github.com:443/djklmin/djklmin.github.io.git
   branch: main
 # Local search
 search:
   path: search.xml  # 索引文件的路径和名称
   field: post       # 搜索的范围：post（文章）、page（页面）、all（所有）
   content: true     # 是否包含文章的全部内容。如果为false，则只包含标题和摘要等元数据。
-
   format: html      # 索引文件的内容格式：html（去除标记）或 raw（保留原始格式）

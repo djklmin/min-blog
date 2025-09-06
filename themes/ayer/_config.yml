@@ -99,8 +99,8 @@ search: true
 # 不想显示可以直接留空
 rss: /atom.xml
 
-# 是否启用黑夜模式开关
-darkmode: true
+# 深色模式配置
+darkmode: true  
 
 # 动态背景效果: 0-关闭，1-动态线条(跟随鼠标)
 canvas_bg: 1

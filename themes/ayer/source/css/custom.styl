@@ -33,4 +33,134 @@ if hexo-config('mouse.enable')
         transform translateX($aside-width)
         &.on
             transform translateX(0)
+
+/* ==================== */
+/* 深度深色模式优化 */
+/* ==================== */
+
+[data-theme="dark"]
+  /* 基础颜色变量 */
+  --background-color: #0a0a0a !important
+  --content-background-color: #111111 !important
+  --card-background-color: #1a1a1a !important
+  --text-color: #e0e0e0 !important
+  --text-secondary-color: #b0b0b0 !important
+  --border-color: #333333 !important
+  --hr-border-color: #333333 !important
+  --code-background-color: #1e1e1e !important
+  --pre-background-color: #1e1e1e !important
+  --link-color: #bb86fc !important
+  --link-hover-color: #985eff !important
+
+/* 强制深色背景 */
+body.dark
+  background-color: #0a0a0a !important
+  color: #e0e0e0 !important
+
+/* 头部导航栏深色化 */
+.navbar
+  background-color: #111111 !important
+  border-bottom: 1px solid #333333 !important
+
+.navbar-menu
+  background-color: #111111 !important
+
+/* 主要内容区域深色化 */
+.main
+  background-color: #0a0a0a !important
+
+.post-wrapper
+  background-color: #111111 !important
+  border: 1px solid #333333 !important
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4) !important
+
+/* 侧边栏深度深色化 */
+.sidebar
+  background-color: #111111 !important
+  border: 1px solid #333333 !important
+
+.sidebar-inner
+  background-color: #111111 !important
+
+/* 卡片组件深色化 */
+.card
+  background-color: #1a1a1a !important
+  border: 1px solid #333333 !important
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important
+
+/* 代码块深度优化 */
+pre, code, .highlight
+  background-color: #1e1e1e !important
+  color: #d4d4d4 !important
+  border: 1px solid #333333 !important
+
+/* 表格深色化 */
+table
+  background-color: #1a1a1a !important
+  border-color: #333333 !important
+
+th, td
+  background-color: #111111 !important
+  border-color: #333333 !important
+  color: #e0e0e0 !important
+
+/* 按钮深色化 */
+.btn, .button
+  background-color: #333333 !important
+  color: #e0e0e0 !important
+  border-color: #444444 !important
+
+.btn:hover
+  background-color: #444444 !important
+  border-color: #555555 !important
+
+/* 分页器深色化 */
+.pagination
+  background-color: #111111 !important
+
+.pagination .page-number
+  background-color: #1a1a1a !important
+  border-color: #333333 !important
+  color: #e0e0e0 !important
+
+/* 评论区深色化 */
+.comments
+  background-color: #111111 !important
+
+.comment
+  background-color: #1a1a1a !important
+  border-color: #333333 !important
+
+/* 移动端深色模式优化 */
+@media(max-width: 768px)
+  [data-theme="dark"]
+    .sidebar
+      background-color: #111111 !important
+      border-right: 1px solid #333333 !important
     
+    .content.on
+      background-color: #0a0a0a !important
+
+/* 滚动条深色化 */
+[data-theme="dark"] ::-webkit-scrollbar
+  width: 8px
+  height: 8px
+
+[data-theme="dark"] ::-webkit-scrollbar-track
+  background: #1a1a1a
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb
+  background: #333333
+  border-radius: 4px
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover
+  background: #444444
+
+/* 选择文本深色化 */
+[data-theme="dark"] ::selection
+  background: #bb86fc
+  color: #000000
+
+[data-theme="dark"] ::-moz-selection
+  background: #bb86fc
+  color: #000000
