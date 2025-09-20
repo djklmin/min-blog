@@ -1,15 +1,12 @@
-<body>
-  <!-- ... -->
-  <div id="my-shouts-container"></div>
-  <script>
-    myQexoShouts.init({
-        el: "#my-shouts-container", 
-        avatar: "/image/avatar", // 你的头像
-        name: "min", // 你的名字
-        limit: 5, // 加载几条
-        baseURL: "https://vercel.com/flys-projects-dddec0f2/flyminos/CREK9PwPejsiFZYu466B3jFudv3w" // 你的Qexo API地址
-    }).catch(function(error) {
-        console.error("加载过程中出现问题:", error);
-    });
-    </script>
-</body>
+---
+title: 说说
+date: 2023-10-27 15:30:00
+---
+
+<div id="qexot"></div>
+<script src="https://registry.npmmirror.com/qexo-static/1.6.0/files/hexo/talks.js"></script>
+<link rel="stylesheet" href="https://registry.npmmirror.com/qexo-static/1.6.0/files/hexo/talks.css">
+<script>
+    // 使用你的 Vercel 部署地址
+    showQexoTalks("qexot", "https://flyminos-ctczs75t0-flys-projects-dddec0f2.vercel.app", 5)
+</script>
