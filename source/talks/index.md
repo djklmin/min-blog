@@ -1,12 +1,12 @@
 ---
+date: '2023-10-27T15:30:00+08:00'
 title: 说说
-date: 2023-10-27 15:30:00
+updated: '2025-09-21T10:13:11.058+08:00'
+---
+---
+title: 说说comments: falsetop_img: false---
+
+<!-- 1. 新版样式 & 脚本 --><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/kuiyr0810/qexo-talks@main/suns/talk.min.css"><script src="https://cdn.jsdelivr.net/gh/kuiyr0810/qt@main/suns/talk.min.js"></script><!-- 2. 代码高亮（可选） --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css"><script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js" data-autoloader></script><!-- 3. 图片灯箱（可选） --><script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.8/dist/medium-zoom.min.js"></script><!-- 4. 说说容器 --><div id="my-shouts-container"></div><!-- 5. 初始化 --><script>myQexoShouts.init({el: "#my-shouts-container",baseURL: "https://flyminos.qzz.io",   // ⚠️ 只写域名，别带路径avatar: "/image/avatar",                  // 头像地址，可绝对/相对name: "min",                              // 昵称limit: 5                                  // 每页条数}).then(() => {// 图片灯箱生效mediumZoom('#my-shouts-container img');}).catch(err => {console.error("说说加载失败：", err);});</script>
+
 ---
 
-<div id="qexot"></div>
-<script src="https://registry.npmmirror.com/qexo-static/1.6.0/files/hexo/talks.js"></script>
-<link rel="stylesheet" href="https://registry.npmmirror.com/qexo-static/1.6.0/files/hexo/talks.css">
-<script>
-    // 使用你的 Vercel 部署地址
-    showQexoTalks("qexot", "https://flyminos-ctczs75t0-flys-projects-dddec0f2.vercel.app", 5)
-</script>
