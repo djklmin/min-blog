@@ -1,22 +1,6 @@
 ---
-date: '2023-10-27T15:30:00+08:00'
+date: '2023-11-08T16:45:00+08:00'
 title: 说说
-updated: '2025-09-21T14:24:33.900+08:00'
+updated: '2025-09-20T22:32:13.793+08:00'
 ---
-<script src="https://cdn.jsdelivr.net/gh/kuiyr0810/qt@main/suns/talk.min.js"></script>
-
-
-<div id="my-shouts-container"></div>
-
-<script>
-myQexoShouts.init({
-  el: "#my-shouts-container",
-  baseURL: "https://flyminos.qzz.io",  // 只写域名
-  avatar: "/image/avatar",              // 你的头像
-  name: "Fly",
-  limit: 5
-});
-</script>
-
-
-
+<div id="qexot"></div><script src="https://registry.npmmirror.com/qexo-static/1.6.0/files/hexo/talks.js"></script><link rel="stylesheet" href="https://registry.npmmirror.com/qexo-static/1.6.0/files/hexo/talks.css"><script>showQexoTalks("qexot", "https://flyminos.qzz.io/", 5)</script>
